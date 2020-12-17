@@ -1,16 +1,18 @@
 // Imports
-require('dotenv').config();
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const passport = require('passport');
-
-const PORT = process.env.PORT || 8000;
+// const passport = require('passport');
+// require('./config/passport')(passport);
+// require('dotenv').config();
 
 // Middleware
-app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(cors());
+
+// Controllers
+app.use('/users', require('./controllers/users'));
 
 // Home route
 app.get('/', (req, res) => {
@@ -18,6 +20,7 @@ app.get('/', (req, res) => {
 });
 
 // Listen method
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
   console.log(`The server is up and running on PORT ${PORT}`);
 });

@@ -8,7 +8,6 @@ mongoose.connect(`${process.env.MONGO_URI}/mernAuth`, {
 });
 
 const db = mongoose.connection;
-console.log(db);
 
 db.once('open', () => {
   console.log(`Connected to MongoDB at ${db.host}:${db.port}`);
@@ -18,5 +17,6 @@ db.on('error', (err) => {
   console.log(`Database error:\n${err}`);
 });
 
-const User = require('./User');
-module.exports = User;
+module.exports = {
+  User: require('./User')
+};
